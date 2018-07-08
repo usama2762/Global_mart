@@ -18,6 +18,7 @@ class CATEGORY(models.Model):
 	category_promotion=models.CharField(max_length=256,blank=True, null=True)  # category promotion
 	category_discount=models.IntegerField( blank=True, null=True)  # category discount
 
+
 class SUBCAT(models.Model):
 	subcategory_parentid=models.ForeignKey(CATEGORY, on_delete=models.CASCADE, blank=True, null=True)  # SUBCATegory's parent (category)ID
 	subcategory_subcatparentid=models.ForeignKey("self",on_delete=models.CASCADE, blank=False, null=False)  # SUBCATegory's parent (subcategory)ID
@@ -48,6 +49,7 @@ class ITEM(models.Model):
 class ITEM_RATING(models.Model):
 	Item_id=models.ForeignKey(ITEM, on_delete=models.CASCADE, blank=False, null=False)
 	rating=models.IntegerField( blank=True, null=True,  default=True)  # item rating
+	itemrating_review=models.CharField(max_length=512, blank=True, null=True)
 
 class ITEM_PROMOTION(models.Model):
 	Item_id=models.ForeignKey(ITEM, on_delete=models.CASCADE, blank=False, null=False)
@@ -70,3 +72,6 @@ class CAT_PROMOTION(models.Model):
 	Cat_Promo_start_date=models.DateTimeField()
 	Cat_Promo_end_date=models.DateTimeField()
 
+class shop_cat_relation(models.Model):
+	catid=models.ForeignKey(CATEGORY, on_delete=models.CASCADE, blank=False, null=False)
+	shopid=models.ForeignKey(SHOP, on_delete=models.CASCADE, blank=False, null=False)
